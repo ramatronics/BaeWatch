@@ -1,5 +1,4 @@
-﻿using BW.Data.Core.Common;
-using BW.Data.Core.Configuration;
+﻿using BW.Data.Core.Configuration;
 using LinqToTwitter;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +6,7 @@ using System.Text;
 
 namespace BW.Data.Twitter
 {
-    public class TwitterAdapter 
+    public class TwitterAdapter
     {
         private TwitterContext _twitterCtx;
 
@@ -58,10 +57,10 @@ namespace BW.Data.Twitter
         public string[] UserProfileInfo(string inUserIdentifier_)
         {
             User tmp =
-                (from tweet in _twitterCtx.User
-                 where tweet.Type == UserType.Show &&
-                       tweet.ScreenName == inUserIdentifier_
-                 select tweet).SingleOrDefault();
+                    (from tweet in _twitterCtx.User
+                     where tweet.Type == UserType.Show &&
+                           tweet.ScreenName == inUserIdentifier_
+                     select tweet).SingleOrDefault();
 
             return new string[] { tmp.ProfileImage, tmp.Location, tmp.Description, tmp.Name };
         }
