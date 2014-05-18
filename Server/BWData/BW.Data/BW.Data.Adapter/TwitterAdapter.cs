@@ -2,7 +2,6 @@
 using LinqToTwitter;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BW.Data.Twitter
 {
@@ -15,7 +14,7 @@ namespace BW.Data.Twitter
             this._twitterCtx = new TwitterContext(inAuth_);
         }
 
-        public string[] UserText(string inUserName_)
+        public List<Status> UserTweets(string inUserName_)
         {
             List<Status> statusList = new List<Status>(from tweet in _twitterCtx.Status
                                                        where tweet.Type == StatusType.User &&
@@ -46,9 +45,10 @@ namespace BW.Data.Twitter
                 maxID = tmp[tmp.Count - 1].StatusID;
             }
 
+            return statusList;
         }
 
-        public string[] UserProfileInfo(string inUserIdentifier_)
+        public User UserProfileInfo(string inUserIdentifier_)
         {
             User tmp =
                     (from tweet in _twitterCtx.User
@@ -56,10 +56,11 @@ namespace BW.Data.Twitter
                            tweet.ScreenName == inUserIdentifier_
                      select tweet).SingleOrDefault();
 
-            return new string[] { tmp.ProfileImage, tmp.Location, tmp.Description, tmp.Name };
+            return tmp;
+            //return new string[] { tmp.ProfileImage, tmp.Location, tmp.Description, tmp.Name };
         }
 
-        public ulong[] UserFollowers(string inUserIdentifier_)
+        public Friendship UserFollowers(string inUserIdentifier_)
         {
             Friendship tmp =
                    (from fship in _twitterCtx.Friendship
@@ -67,10 +68,11 @@ namespace BW.Data.Twitter
                           fship.ScreenName == inUserIdentifier_
                     select fship).SingleOrDefault();
 
-            return tmp.IDInfo.IDs.ToArray();
+            return tmp;
+            //return tmp.IDInfo.IDs.ToArray();
         }
 
-        public ulong[] UserFollowing(string inUserIdentifier_)
+        public Friendship UserFollowing(string inUserIdentifier_)
         {
             Friendship tmp =
                     (from fship in _twitterCtx.Friendship
@@ -78,7 +80,8 @@ namespace BW.Data.Twitter
                            fship.ScreenName == inUserIdentifier_
                      select fship).SingleOrDefault();
 
-            return tmp.IDInfo.IDs.ToArray();
+            return tmp;
+            //return tmp.IDInfo.IDs.ToArray();
         }
     }
 }

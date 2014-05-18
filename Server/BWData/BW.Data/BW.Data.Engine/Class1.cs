@@ -2,12 +2,13 @@
 {
     public class UserDataService
     {
-        public UserDataService() { }
+        public UserDataService()
+        {
+        }
 
         public bool isMale()
         {
             return true;
         }
-
     }
 }
