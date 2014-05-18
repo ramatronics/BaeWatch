@@ -15,7 +15,7 @@ namespace BW.Data.Twitter
             this._twitterCtx = new TwitterContext(inAuth_);
         }
 
-        public string UserText(string inUserName_)
+        public string[] UserText(string inUserName_)
         {
             List<Status> statusList = new List<Status>(from tweet in _twitterCtx.Status
                                                        where tweet.Type == StatusType.User &&
@@ -46,12 +46,6 @@ namespace BW.Data.Twitter
                 maxID = tmp[tmp.Count - 1].StatusID;
             }
 
-            StringBuilder sb = new StringBuilder();
-
-            for (int i = 0; i < statusList.Count; i++)
-                sb.Append(statusList[i].Text + " ");
-
-            return sb.ToString();
         }
 
         public string[] UserProfileInfo(string inUserIdentifier_)
