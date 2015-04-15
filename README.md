@@ -6,4 +6,4 @@ Its as simple as:
             GenderAPIEngine engine = new GenderAPIEngine();
             GenderResult result = engine.TwitterGender("ramatronics");
 
-
+Please use this folder; https://github.com/ramatronics/BaeWatch/tree/master/BaeWatch.GenderAPI
